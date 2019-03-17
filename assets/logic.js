@@ -6,11 +6,10 @@ var queryURL='https://api.giphy.com/v1/gifs/search?api_key=HQgOLyan73JAYNbbtRUST
 var searchGify ='equifax';
 
 $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function (response) {
-    console.log(response);
-    var gifImage = response.gif;
-    $('div').img(gifImage);
-  });
-
+  url: queryURL,
+  method: "GET"
+}).then(function(response) {
+  console.log(response);
+  var gifImage = response.gif;
+  $('div').img(gifImage);
+});
