@@ -10,4 +10,7 @@ $("button").on("click", function () {
     console.log(response);
   });
 
+  var getGif= response.val().trim();
+  console.log(getGif);
+
 });
