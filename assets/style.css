@@ -1,0 +1,10 @@
+body {
+    background-color: aqua;
+}
+
+#giph {
+    height: 100%;
+    width: 100%;
+    background-color: blueviolet;
+    color: #fff;
+}
