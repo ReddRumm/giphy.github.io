@@ -18,12 +18,14 @@ function displayGiphs() {
     for (var i = 0; i < result.length; i++) {
       var imgURL = result[i].images.fixed_height.url;
       var rating = result[i].rating;
-      var rate = $('<p>').text('Rating: ' + rating);
-      var image = $('<img>').attr('src', imgURL);
+      var gifDiv=$('<div class="giphDiv col-md-4 mx-auto">');
+      var rate = $('<p id="banner">').text('Rating: ' + rating);
+      var image = $('<img id="liveGif">').attr('src', imgURL);
       console.log(imgURL);
       console.log(rating);
-      $('.giphy').prepend(image);
-      $('.giphy').prepend(rate);
+      (gifDiv).prepend(rate);
+      (gifDiv).prepend(image);
+      $('.giphy').prepend(gifDiv);
     }
 
     $('#buttons-view').prepend('.giphy');
@@ -37,7 +39,7 @@ function renderButtons() {
   $('.buttons').empty();
 
   for (var i = 0; i < giphs.length; i++) {
-    var a = $('<button>');
+    var a = $('<button id="gifBtn">');
     a.addClass('gif-btn');
     a.addClass('btn btn-primary');
     a.attr('data', giphs[i]);
@@ -53,6 +55,20 @@ $('#add-giph').on('click', function (event) {
   renderButtons();
 });
 
+$(".gif").on("click", function() {
+  // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+  var state = $(this).attr("data-state");
+  // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+  // Then, set the image's data-state to animate
+  // Else set src to the data-still value
+  if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+  } else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+  }
+});
 
 $(document).on('click', '.gif-btn', displayGiphs);
 renderButtons();
