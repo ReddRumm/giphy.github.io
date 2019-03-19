@@ -24,29 +24,32 @@
     </head>
 
     <body>
-        
+
         <div class='container'>
 
             <div class='row'>
-                <div class='col-lg-*'>
-                    <button type="button" class="btn btn-info"></button>
+                <div class='col-lg-* mx-auto'>
+                    <div class='buttons'>
+
+                    </div>
                 </div>
             </div>
 
             <div class='row'>
-                <div class='col-lg-9'>
+                <div class='col-lg-9' id='btnColum'>
                     <div class='giphy' id='giph'>
-                        
+
                     </div>
                 </div>
 
                 <div class='col-lg-3'>
-                    <div class='searchForm'>
+                    <div class='searchForm' id='giphColum'>
                         <!-- This form will be where users input data about the movies -->
-                        <form id="giphy-form">
-                            <label for="giphy-input">Search for a Giphy</label>
-                            <input type="text" id="giphy-input"><br><br> <!-- This button will trigger our AJAX call -->
-                            <button id='add-giph' type='button' class="btn btn-info">Search</button>
+                        <form id="search">
+                            <input type="text" id="giph-input">
+                            <br><br>
+                            <!-- Button triggers new movie to be added -->
+                            <input id="add-giph" class="btn btn-primary" style='float:right' type="submit" value="Search">
                         </form>
                     </div>
                 </div>
