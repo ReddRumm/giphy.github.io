@@ -14,11 +14,14 @@ $.ajax({
   console.log(response);
   // After the data from the AJAX request comes back
   // Saving the image_original_url property
-  gifImage=response.data.image_orifginal_url;
+  gifUrl=response.data.image_orifginal_url;
   // Creating and storing an image tag
-  gifToHtml=$(`<img>`);
+  gifImage=$(`<img>`);
   // Setting the gifToHtml src attribute to imageUrl
-  
+  gifImage.attr(`src`, gifUrl);
+  gifImage.attr(`alt`,`fixie`);
+  // Prepending the gifToHtml to the images div
+  $(gifImage).prepend(`.giphy`);
 });
 
 
@@ -26,7 +29,6 @@ $.ajax({
 
 
 
-// Prepending the catImage to the images div
 
 
 
