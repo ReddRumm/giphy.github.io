@@ -1,42 +1,32 @@
 // first make a few gif array items
-var giphs = ["fixie", "red bull rampage", "bike packing", "history"];
+var giphs = ['fixie', 'red bull rampage', 'bike packing', 'history'];
 
 
 function displayGiphs() {
 
-  var giph = $(this).attr("data");
-  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=HQgOLyan73JAYNbbtRUSTappfYi1DEp2&q=" + giph + "&limit=10&offset=0&rating=G&lang=en";
+  var giph = $(this).attr('data');
+  var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=HQgOLyan73JAYNbbtRUSTappfYi1DEp2&q=' + giph + '&limit=10&offset=0&rating=G&lang=en';
 
   $.ajax({
     url: queryURL,
-    method: "GET"
+    method: 'GET'
   }).then(function (response) {
     // log response
     console.log(response.data);
-    var result=response.data;
-    // make loop to get the first 10 responses
-  
-      // Retrieving the URL for the image
-      var imgURL = result.images.fixed_height.url;
+    var result = response.data;
+    // I set the query limit to 10.
+    for (var i = 0; i < result.length; i++) {
+      var imgURL = result[i].images.fixed_height.url;
+      var rating = result[i].rating;
+      var rate = $('<p>').text('Rating: ' + rating);
+      var image = $('<img>').attr('src', imgURL);
       console.log(imgURL);
-      
-      // Creating an element to have the rating displayed
-      var rating = result.rating;
       console.log(rating);
-      var rate = $("<p>").text("Rating: " + rating);
-      
-      // Creating an element to hold the image
-      var image = $("<img>").attr("src", imgURL);
-      // Appending the image
-      $('.giphy').append(image);
-      
-      // Displaying the rating
-      $('.giphy').append(rate);
-  
-    // Putting the entire movie above the previous movies
-    $("#buttons-view").append('.giphy');
-  
+      $('.giphy').prepend(image);
+      $('.giphy').prepend(rate);
+    }
 
+    $('#buttons-view').prepend('.giphy');
   });
 
 
@@ -44,27 +34,29 @@ function displayGiphs() {
 
 // Function for displaying movie data
 function renderButtons() {
-  $(".buttons").empty();
+  $('.buttons').empty();
 
   for (var i = 0; i < giphs.length; i++) {
-    var a = $("<button>");
-    a.addClass("gif-btn");
+    var a = $('<button>');
+    a.addClass('gif-btn');
     a.addClass('btn btn-primary');
-    a.attr("data", giphs[i]);
+    a.attr('data', giphs[i]);
     a.text(giphs[i]);
-    $(".buttons").append(a);
+    $('.buttons').append(a);
   }
 }
-$("#add-giph").on("click", function (event) {
-  event.preventDefault();
-  var giph = $("#giphy-input").val().trim();
-  giphs.push(giph);
 
+$('#add-giph').on('click', function (event) {
+  event.preventDefault();
+  var giph = $('#giph-input').val().trim();
+  giphs.push(giph);
   renderButtons();
 });
 
+
+$(document).on('click', '.gif-btn', displayGiphs);
 renderButtons();
-$(document).on("click", ".btn", displayGiphs);
+
 
 
 

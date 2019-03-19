@@ -3,6 +3,7 @@ body {
 }
 
 #giph {
+    padding:5px;
     margin: auto;
     height: 100%;
     width: 100%;
@@ -10,7 +11,7 @@ body {
     color: #fff;
 }
 
-#giphColum {
+#searchColum {
     margin:auto;
     height: 50%;
     width: 100%;
