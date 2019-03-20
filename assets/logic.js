@@ -12,33 +12,38 @@ function displayGiphs() {
     method: 'GET'
   }).then(function (response) {
     // log response
-    console.log(response.data);
+    console.log(response);
     var result = response.data;
     // I set the query limit to 10.
     for (var i = 0; i < result.length; i++) {
-      var imgURL = result[i].images.fixed_height_still.url;
+      var imgURL = result[i].images.fixed_height.url;
       var rating = result[i].rating;
-      var gifDiv=$('<div class="giphDiv col-md-4 mx-auto">');
+      var gifDiv = $('<div class="giphDiv col-md-4 mx-auto">');
       var rate = $('<p id="banner">').text('Rating: ' + rating);
       var image = $('<img id="liveGif">').attr('src', imgURL);
-      image.addClass('btn');
+      var gifButton = $('<button>').append(image);
+
       console.log(imgURL);
       console.log(rating);
+
       (gifDiv).prepend(rate);
-      (gifDiv).prepend(image);
+      (gifDiv).prepend(gifButton);
       $('.giphy').prepend(gifDiv);
     }
-
-    $('.giphDiv').on('click', function() {
-      if (imgURL===result.fixed_height_still.url) {
-        imgURL=result.fixed_height.url;
-      }
-    });
-
     $('#buttons-view').prepend('.giphy');
   });
 }
 
+$('#liveGif').on('click', function (event) {
+  event.preventDefault();
+  console.log('clicked');
+  if (result[i].fixed_height_still.url) {
+    imgURL = result[i].fixed_height.url;
+    var image = $('<img id="liveGif">').attr('src', imgURL);
+    (gifDiv).prepend(image);
+    $('.giphy').prepend(gifDiv);
+  }
+});
 
 // Function for displaying movie data
 function renderButtons() {
@@ -61,36 +66,5 @@ $('#add-giph').on('click', function (event) {
   renderButtons();
 });
 
-
-
 $(document).on('click', '.gif-btn', displayGiphs);
 renderButtons();
-
-
-
-
-
-
-
-
-// =========================
-// save the responce in a var
-
-// make an array and store in a var
-
-// push response to array
-
-// loop through arrray
-// Add button attr to the array items
-// ========================================
-
-// make an on click function thats 
-// stores user input
-// pulls responce for ajax
-// populated results into thre array
-// which then is populated onto the DOM
-
-
-// populate buttons on the DOM
-
-// also populate gifs on the DOM when the button is pupolated
